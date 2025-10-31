@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 220.9 39.3% 11%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224.3 76.3% 48%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .bg-aurora {
+    --aurora-color-1: #3b82f6; /* blue-500 */
+    --aurora-color-2: #8b5cf6; /* purple-500 */
+    --aurora-color-3: #ec4899; /* pink-500 */
+    position: relative;
+    overflow: hidden;
+  }
+  .bg-aurora::before {
+    content: "";
+    position: absolute;
+    inset: -100px;
+    background-image: conic-gradient(
+        from 90deg at 40% 40%,
+        var(--aurora-color-1),
+        var(--aurora-color-2),
+        var(--aurora-color-3),
+        var(--aurora-color-2),
+        var(--aurora-color-1)
+    );
+    filter: blur(80px);
+    opacity: 0.2;
+    z-index: 0;
+    animation: aurora 20s linear infinite;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 8px currentColor;
+  }
+  
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-black/10;
+  }
+
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-shine::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
+    transform: rotate(45deg);
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0;
+  }
+
+  .btn-shine:hover::after {
+    transform: scale(2);
+    opacity: 1;
+    transition-duration: 0.8s;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
